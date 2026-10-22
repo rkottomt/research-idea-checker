@@ -35,3 +35,8 @@ The papers say "FPGA", "field-programmable", "accelerator"; the query says "repr
 - Nonsense queries (lasagna, knitting, taxes, puppies): 0.68-0.84
 - Technical descriptions of existing work: 0.27-0.44
 - Title -> nearest other paper (calibration, n=300): p25 0.381, p50 0.456, p75 0.518, p95 0.596
+
+## Verified in the finished app (Step 9, no API key = pure vector search)
+- Query A -> CROWDED (closer than 72%). Top 2 as above; #4 and #5 are also continual-learning papers.
+- Query B -> VERY CLOSE MATCH (closer than 85%). FPGA survey #1, BARVINN #3.
+- Full flow across two launches: added 1503.02531 by ID, checked query A, saved it, quit; relaunched and both the paper and the saved idea were still there (1,946 items).
