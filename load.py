@@ -10,6 +10,7 @@ import os
 import sys
 import time
 
+import novelty
 from db import ARXIV, DATA_PATH, get_collection, paper_record
 
 BATCH_SIZE = 100
@@ -40,6 +41,9 @@ def main():
         rate = done / (time.time() - start)
         print(f"  {done}/{len(todo)} embedded ({rate:.1f} papers/s, ~{(len(todo) - done) / rate:.0f}s left)")
     print(f"done in {time.time() - start:.1f}s; collection now holds {collection.count()} items")
+    if todo or not os.path.exists(novelty.CALIBRATION_PATH):
+        calib = novelty.calibrate(collection)
+        print(f"calibrated novelty scores on {len(calib['nearest_neighbour_distances'])} sample titles")
 
 
 if __name__ == "__main__":
