@@ -1,0 +1,15 @@
+# secrets
+.env
+
+# local vector store (rebuilt on first run)
+chroma_store/
+
+# raw dataset (downloaded by fetch script)
+data/
+
+# python
+.venv/
+venv/
+__pycache__/
+*.pyc
+.DS_Store
