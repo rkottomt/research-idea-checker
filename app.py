@@ -5,6 +5,7 @@ Usage:  python app.py
 import os
 import re
 import textwrap
+import uuid
 from collections import Counter
 
 import llm
@@ -37,6 +38,19 @@ def search(collection, text, k, where):
             for i, doc, meta, dist in zip(res["ids"][0], res["documents"][0], res["metadatas"][0], res["distances"][0])]
 
 
+def search_merged(collection, texts, k, where):
+    """Search with several phrasings of the same idea; keep each paper's best distance."""
+    best, found_by = {}, {}
+    for n, text in enumerate(texts):
+        for p in search(collection, text, k, where):
+            found_by.setdefault(p["id"], set()).add(n)
+            if p["id"] not in best or p["distance"] < best[p["id"]]["distance"]:
+                best[p["id"]] = p
+    for pid, p in best.items():
+        p["via_rewrite_only"] = 0 not in found_by[pid]  # text 0 is the user's own words
+    return sorted(best.values(), key=lambda p: p["distance"])[:k]
+
+
 def parse_filters(text):
     """'cs.AR 2022' -> exact metadata filter on category and minimum year (vectors do the fuzzy part)."""
     clauses = [PAPERS_ONLY]
@@ -51,6 +65,7 @@ def parse_filters(text):
 def show_papers(papers):
     for n, p in enumerate(papers, 1):
         tag = "  (added by you)" if p["source"] == USER_PAPER else ""
+        tag += "  (found via research terms)" if p.get("via_rewrite_only") else ""
         print(f"  [{n}] {p['distance']:.3f}  {p['title']}{tag}")
         print(f"            {p['primary_category']}, {p['year']}  {p['url']}")
 
@@ -71,7 +86,14 @@ def check_idea(collection, calib, idea=None):
     filters = ask("Filter by category and/or earliest year (e.g. 'cs.AR 2022'), or Enter for all: ")
     where = parse_filters(filters)
 
-    papers = search(collection, idea, TOP_K, where)
+    phrasings = [idea]
+    if llm.available():
+        try:
+            phrasings.append(llm.research_terms(idea))
+            print("\nIn research terms: " + phrasings[1])
+        except Exception as e:
+            print(f"  (Couldn't rephrase with {llm.MODEL}: {e}. Searching with your words only.)")
+    papers = search_merged(collection, phrasings, TOP_K, where)
     if not papers:
         print("No papers match those filters.")
         return
@@ -86,7 +108,7 @@ def check_idea(collection, calib, idea=None):
     print("\n" + wrap(breakdown(papers), indent="  "))
 
     similar_ideas = [i for i in search(collection, idea, 3, {"source": USER_IDEA})
-                     if i["distance"] < novelty.SIMILAR_IDEA]
+                     if i["distance"] < novelty.SIMILAR_IDEA and i["document"] != idea]
     for past in similar_ideas:
         print(f"\n  You had a similar idea on {past['added_at'][:10]}: \"{past['document']}\"")
 
@@ -106,21 +128,24 @@ def check_idea(collection, calib, idea=None):
         print("\n  (Set OPENAI_API_KEY in .env to also get a related-work summary.)")
 
     if ask("\nSave this idea to your notebook? [y/N] ").lower() == "y":
-        collection.add(ids=[f"idea-{now()}"], documents=[idea], metadatas=[{
+        collection.add(ids=[f"idea-{uuid.uuid4().hex[:12]}"], documents=[idea], metadatas=[{
             "title": idea[:80], "source": USER_IDEA, "added_at": now(), "verdict": result["label"],
             "closest_paper": papers[0]["title"], "primary_category": "idea", "year": int(now()[:4]), "url": "",
         }])
         print("  Saved. Future checks will remind you of it.")
     if ask("Export this report as Markdown? [y/N] ").lower() == "y":
-        print(f"  Wrote {export_report(idea, result, papers, writeup)}")
+        print(f"  Wrote {export_report(phrasings, result, papers, writeup)}")
 
 
-def export_report(idea, result, papers, writeup):
+def export_report(phrasings, result, papers, writeup):
     os.makedirs(REPORTS_DIR, exist_ok=True)
+    idea = phrasings[0]
     slug = re.sub(r"[^a-z0-9]+", "-", idea.lower()).strip("-")[:50]
     path = os.path.join(REPORTS_DIR, f"{slug}.md")
-    lines = [f"# Idea check: {idea}", "", f"_Checked {now()[:10]}_", "",
-             f"**Novelty:** {result['label']}. {result['detail']}", "", "## Closest prior work", ""]
+    lines = [f"# Idea check: {idea}", "", f"_Checked {now()[:10]}_", ""]
+    if len(phrasings) > 1:
+        lines += [f"_Also searched as:_ {phrasings[1]}", ""]
+    lines += [f"**Novelty:** {result['label']}. {result['detail']}", "", "## Closest prior work", ""]
     lines += [f"{n}. [{p['title']}]({p['url']}) ({p['primary_category']}, {p['year']}), distance {p['distance']:.3f}"
               for n, p in enumerate(papers, 1)]
     if writeup:
@@ -165,7 +190,7 @@ def add_paper(collection):
         if not title or not abstract:
             print("  Need both a title and an abstract.")
             return
-        paper = {"id": f"user-{now()}", "title": title, "abstract": abstract, "authors": [],
+        paper = {"id": f"user-{uuid.uuid4().hex[:12]}", "title": title, "abstract": abstract, "authors": [],
                  "primary_category": ask("Category, e.g. cs.AR (Enter to skip): ") or "unknown"}
 
     pid, doc, meta = paper_record(paper, USER_PAPER)

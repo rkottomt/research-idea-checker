@@ -30,8 +30,27 @@ CLOSEST MATCH: the single closest paper and how the idea differs from it (1-2 se
 GAPS: 2-3 lines starting with "- ", each an angle the idea could take that the listed papers do not cover."""
 
 
+REWRITE_PROMPT = """Restate this research idea in one or two sentences using the standard technical
+terms a paper abstract on the topic would use. Do not name specific papers, authors, or results.
+Return only the restated idea.
+
+Idea: {idea}"""
+
+
 def available():
     return bool(os.getenv("OPENAI_API_KEY"))
+
+
+def _chat(messages):
+    from openai import OpenAI
+
+    resp = OpenAI().chat.completions.create(model=MODEL, messages=messages)
+    return resp.choices[0].message.content.strip()
+
+
+def research_terms(idea):
+    """Plain-English ideas embed far from jargon-heavy abstracts, so also search with a technical restatement."""
+    return _chat([{"role": "user", "content": REWRITE_PROMPT.format(idea=idea)}])
 
 
 def cited_numbers(text):
@@ -48,18 +67,12 @@ def related_work(idea, papers):
     Returns (text, invalid_citations). invalid_citations lists any [n] that points
     outside the papers we actually gave the model.
     """
-    from openai import OpenAI
-
     listing = "\n\n".join(
         f"[{i}] ({p['year']}, {p['primary_category']}) {p['document'][:1500]}" for i, p in enumerate(papers, 1)
     )
-    resp = OpenAI().chat.completions.create(
-        model=MODEL,
-        messages=[
-            {"role": "system", "content": SYSTEM},
-            {"role": "user", "content": PROMPT.format(idea=idea, papers=listing)},
-        ],
-    )
-    text = resp.choices[0].message.content.strip()
+    text = _chat([
+        {"role": "system", "content": SYSTEM},
+        {"role": "user", "content": PROMPT.format(idea=idea, papers=listing)},
+    ])
     invalid = sorted(n for n in cited_numbers(text) if not 1 <= n <= len(papers))
     return text, invalid
