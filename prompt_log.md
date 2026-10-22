@@ -1,6 +1,14 @@
 # Prompt Log — HW6: Research Idea Checker
 
-**Tools:** Claude Code (Claude Opus 5.5) in the terminal, used for brainstorming, planning, scaffolding, and code. I review, run, and test everything myself.
+**Tools:**
+- **Claude Code (Claude Opus 5.5)** in the terminal for brainstorming, planning, code, debugging, and the AI-generated part of the README. It could run the app and inspect the installed Chroma version directly, which mattered because Chroma's API changes between versions.
+- **OpenAI `gpt-5.4-mini`** inside the app for the research-terms rewrite and the related-work summary. It's cheap, fast, and covered by the course's OpenAI credits.
+- **Chroma's built-in `all-MiniLM-L6-v2`** for embeddings. It's free, runs locally, and needs no key, so graders can run the app.
+
+**Where the AI got it wrong / needed correcting:**
+- The first truncation check reported every document as exactly 128 tokens. The tokenizer file has its own 128-token cutoff, so the "untruncated" count was still truncated. The real figure is 56% of docs over 256.
+- Plain vector search called a crowded area (knowledge distillation) "LOOKS OPEN". Found by testing, fixed with the research-terms rewrite.
+- The first version of `search_merged` had tangled logic for tracking which phrasing found a paper. Rewritten to track a set per paper.
 
 ---
 
@@ -46,3 +54,9 @@ Issue hit: `.venv/bin/pip` failed with "bad interpreter" because my folder name 
   Problem found: plain-English "transferring what a big network knows into a much smaller one" got LOOKS OPEN and missed every distillation paper (Hinton's paper ranked 26th); the technical phrasing found them at 0.36. Fix: when a key is set, the LLM restates the idea in research terms and the app searches with both phrasings, labelling papers found only by the rewrite. Same query then: VERY CLOSE MATCH, 5/5 distillation papers. The README test queries still use plain vector search only.
   Also: used random IDs for saved ideas and typed-in papers (Chroma silently drops a duplicate ID), and stopped a re-checked idea from matching itself. Cleared my test entries afterwards.
 - **Step 9 (prove the claim):** ran both test queries through the finished app with no API key (pure vector search, so the LLM can't add keywords). Both worked; results in `test_queries.md`. Full add → search → quit → relaunch flow kept everything.
+- **Step 10 (docs):** README with my own sections left as TODOs (the spec says I must write the first four items myself) and an AI-generated section below them, checked against the code. Tested the README's setup steps on a fresh clone: install, "database is empty" message, load in 62 s, same query results.
+
+## Still to do (me)
+- [ ] Write the TODO sections of the README in my own words
+- [ ] Record the video: add a paper (e.g. `1503.02531`), check query A or B, show the verdict + summary
+- [ ] Portfolio entry, Google form
