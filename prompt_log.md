@@ -33,3 +33,10 @@ Result: chose arXiv categories cs.AR (hardware, where most FPGA papers live), cs
 
 Result: set this repo's git author to my `rkottomt` account (no-reply email) and re-authored the first commit. Created `.venv`, installed `chromadb==1.5.9`, and wrote `smoke_test.py` (PersistentClient + one collection). It ran cleanly and created `chroma_store/chroma.sqlite3`.
 Issue hit: `.venv/bin/pip` failed with "bad interpreter" because my folder name `113hw#6` contains `#`, which breaks the script's shebang line. Fix: run `python -m pip` instead.
+
+**Prompt 6**
+> Go ahead with all steps until project is completed.
+
+(Steps 3–10 were all driven by this one prompt. Notes per step below.)
+
+- **Step 3 (smoke test):** 12 hand-written items in a persistent collection; a second run in a new process still reports 12. Found that this Chroma version defaults to `l2` for the built-in model, so I set `configuration={"hnsw": {"space": "cosine"}}`. First test query ("making a neural net small enough for a phone") ranked the FPGA item above quantization, and distillation missed the top 3: short plain-English text vs. short jargon text matches weakly.
