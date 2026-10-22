@@ -27,3 +27,9 @@ Result: created `.gitignore` (ignores `.env`, `chroma_store/`, `data/`), `.env` 
 > I am interested in hardware, fpga, computer vision and machine learning. name the repo research-idea-checker
 
 Result: chose arXiv categories cs.AR (hardware, where most FPGA papers live), cs.CV, cs.LG. Drafted candidate test queries in `test_queries.md`. Created the GitHub repo.
+
+**Prompt 5**
+> Use rkottomt and then go ahead.
+
+Result: set this repo's git author to my `rkottomt` account (no-reply email) and re-authored the first commit. Created `.venv`, installed `chromadb==1.5.9`, and wrote `smoke_test.py` (PersistentClient + one collection). It ran cleanly and created `chroma_store/chroma.sqlite3`.
+Issue hit: `.venv/bin/pip` failed with "bad interpreter" because my folder name `113hw#6` contains `#`, which breaks the script's shebang line. Fix: run `python -m pip` instead.
