@@ -40,3 +40,4 @@ Issue hit: `.venv/bin/pip` failed with "bad interpreter" because my folder name 
 (Steps 3–10 were all driven by this one prompt. Notes per step below.)
 
 - **Step 3 (smoke test):** 12 hand-written items in a persistent collection; a second run in a new process still reports 12. Found that this Chroma version defaults to `l2` for the built-in model, so I set `configuration={"hnsw": {"space": "cosine"}}`. First test query ("making a neural net small enough for a phone") ranked the FPGA item above quantization, and distillation missed the top 3: short plain-English text vs. short jargon text matches weakly.
+- **Step 4 (real data):** `fetch_arxiv.py` pulls 45 papers per half-year (2019–2025) from cs.AR, cs.CV, cs.LG, plus 200 FPGA abstracts (arXiv has no FPGA category), deduped to **1,944 papers**. One paper = title + abstract. Timed 50 first (32 papers/s), then loaded all in about a minute. `load.py` skips IDs already stored, so it's safe to re-run.
