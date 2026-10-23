@@ -1,0 +1,155 @@
+{
+ "model": "gpt-5.4-mini",
+ "rewrites": [
+  {
+   "target": "2112.13150",
+   "good": "We propose accelerating on-chip image filtering by decomposing a 2D convolution kernel into a sequence of separable 1D filters, reducing computational complexity and memory bandwidth requirements. This factorization enables more efficient hardware implementation while preserving the desired filtering operation.",
+   "drifted": "Accelerating on-chip image processing by decomposing a two-dimensional convolution into a sequence of separable one-dimensional operations to reduce compute and memory traffic."
+  },
+  {
+   "target": "2412.17955",
+   "good": "We propose a low-power multiplication architecture for AI accelerators that encodes operands as pulse trains over time rather than conventional binary representations, enabling energy-efficient arithmetic through temporal processing. The design targets reduced hardware complexity and power consumption while preserving sufficient numerical precision for neural network workloads.",
+   "drifted": "A low-power arithmetic unit for AI accelerators that encodes values using time-domain pulse streams rather than conventional binary words, and performs approximate multiply-accumulate operations by exploiting temporal pulse timing and density."
+  },
+  {
+   "target": "2006.12133",
+   "good": "We study memory placement for program data across heterogeneous memory tiers, optimizing which data reside in low-latency, high-power memory versus higher-latency, energy-efficient memory. The goal is to improve performance and energy efficiency by automatically managing data allocation and migration based on access behavior.",
+   "drifted": "Determining which intermediate tensors and model parameters in a neural network should be placed in high-bandwidth, energy-intensive accelerator memory versus lower-bandwidth, energy-efficient host memory to optimize training throughput under power constraints."
+  },
+  {
+   "target": "2212.10612",
+   "good": "We propose a multi-core layer scheduling strategy for neural network inference that partitions and maps model layers across processor cores to minimize inter-core communication and keep activations on-chip. This approach reduces off-chip memory traffic by maximizing data locality during execution.",
+   "drifted": "Designing a runtime for partitioning and mapping the layers of a neural network across multiple processor cores to maximize on-chip data locality and minimize inter-core communication."
+  },
+  {
+   "target": "2512.17834",
+   "good": "We propose a low-latency hardware accelerator for error correction in 5G control and data channels, designed to decode and correct transmission errors under stringent real-time constraints. The chip targets ultra-fast, energy-efficient decoding with minimal area overhead to support near-instantaneous message delivery in wireless communication systems.",
+   "drifted": "A low-latency hardware accelerator for real-time channel decoding in next-generation wireless links, designed to correct symbol errors in ultra-reliable short-packet transmissions under strict latency constraints."
+  },
+  {
+   "target": "2112.13149",
+   "good": "A specialized hardware accelerator for efficient computation of the Radon transform and its inverse, enabling fast forward and backprojection operations for image reconstruction from tomographic scanner measurements.",
+   "drifted": "Specialized hardware for accelerating forward and inverse discrete Radon-like projections, enabling fast computation of projection and backprojection operators for tomographic image reconstruction."
+  },
+  {
+   "target": "2512.23969",
+   "good": "We propose an efficient GPU-accelerated implementation of post-quantum digital signature schemes for document authentication, targeting low-latency signing and verification while preserving cryptographic security against quantum adversaries. The approach leverages parallel hardware acceleration to improve throughput and reduce computational overhead in practical secure document workflows.",
+   "drifted": "Design a GPU-accelerated scheme for high-throughput digital signatures using post-quantum cryptographic primitives, with an emphasis on reducing signing latency and improving batch verification efficiency."
+  },
+  {
+   "target": "2506.15601",
+   "good": "We propose extending GPU memory capacity through disaggregated external memory and storage attached via a high-bandwidth, low-latency interconnect, enabling GPUs to access substantially larger address spaces than on-board memory alone. This architecture aims to reduce memory bottlenecks and support larger-scale data-intensive workloads without requiring changes to the GPU\u2019s core compute design.",
+   "drifted": "Investigate how to extend a GPU\u2019s effective memory hierarchy by attaching external high-bandwidth storage and pooled memory over a novel interconnect, enabling the accelerator to operate on substantially larger datasets with reduced host involvement."
+  },
+  {
+   "target": "1904.09495",
+   "good": "We propose a more efficient on-chip interconnect topology and message-passing protocol for the network linking cores within a single chip, aimed at improving communication latency, bandwidth utilization, and scalability.",
+   "drifted": "A better interconnect topology and routing protocol for coordinating message exchange among processing elements within a single multicore chip."
+  },
+  {
+   "target": "2012.11233",
+   "good": "This work presents a comprehensive survey of hardware- and software-level optimization techniques for accelerating AI inference and training while reducing compute, memory, energy, and deployment costs. It synthesizes system-level and algorithmic methods spanning chip design, model compression, parallelism, scheduling, and compiler/runtime optimization.",
+   "drifted": "A systematic survey of algorithmic and hardware co-optimization techniques for accelerating large-scale machine learning inference and reducing its energy and deployment cost, with emphasis on model compression, compiler/runtime optimization, and specialized accelerator design."
+  },
+  {
+   "target": "2306.17597",
+   "good": "We propose an efficient event-based neural architecture that performs redundant event suppression on asynchronous event camera streams prior to recognition, mimicking brain-like selective temporal processing. The model filters out information-duplicative moments to reduce computation while preserving discriminative spatiotemporal cues for downstream recognition.",
+   "drifted": "An efficient neuromorphic model for event-stream classification that performs adaptive temporal sparsification and compression, discarding redundant asynchronous events before downstream recognition."
+  },
+  {
+   "target": "2306.17555",
+   "good": "We investigate whether pretraining a medical image model on large-scale natural photographs or on in-domain medical scans yields better transfer performance for downstream clinical tasks. This study compares cross-domain and domain-specific warm-start initialization strategies to determine which pretraining source produces more effective feature representations for medical imaging.",
+   "drifted": "Investigate whether pretraining a diagnostic imaging model on large-scale natural image datasets or on other modality-specific medical images yields better transfer performance for downstream radiology tasks. Compare the impact of generic visual feature initialization versus domain-adaptive medical pretraining on convergence, sample efficiency, and clinical accuracy."
+  },
+  {
+   "target": "2501.00651",
+   "good": "We propose using a pretrained single-image-to-3D generative model as a learned compressor within a 3D content generation pipeline, leveraging its latent representation and reconstruction process to encode and decode candidate shapes efficiently. This formulation treats the image-to-3D model as a structural prior for compact representation and synthesis of novel 3D objects.",
+   "drifted": "Using an existing single-image-to-3D reconstruction network as a learned latent codec for a generative model, so that the system compresses and reconstructs observed 3D shapes rather than synthesizing novel ones from scratch."
+  },
+  {
+   "target": "2306.17602",
+   "good": "We study spatiotemporal trajectory modeling for dynamic agents and the ego vehicle in autonomous driving scenes, jointly tracking surrounding vehicles and pedestrians while accounting for their coupled motion over time.",
+   "drifted": "Modeling the temporal interaction dynamics between a moving autonomous vehicle and nearby dynamic agents, with emphasis on predicting how surrounding vehicles and pedestrians evolve relative to the ego vehicle over time."
+  },
+  {
+   "target": "2106.15941",
+   "good": "We propose augmenting deep attention-based image models with additional skip connections to preserve signal diversity and mitigate representational homogenization across layers. This architecture is intended to improve information flow and reduce feature over-smoothing as depth increases.",
+   "drifted": "Investigate whether introducing additional residual pathways in deep vision transformer architectures can improve gradient flow and representation stability by reducing feature homogenization across layers. The goal is to preserve layer-wise signal diversity and prevent progressive over-smoothing as network depth increases."
+  },
+  {
+   "target": "2401.00416",
+   "good": "We propose a method for weakly supervised facial emotion recognition in video, enabling a model to infer affective states from facial dynamics with minimal labeled training data. The approach leverages temporal visual cues and representation learning to reduce dependence on large-scale annotated video corpora.",
+   "drifted": "Develop a self-supervised video representation learning method for detecting facial action units and fine-grained affective dynamics from unlabeled facial footage, reducing reliance on large annotated datasets."
+  },
+  {
+   "target": "1906.12320",
+   "good": "We propose a generative 3D shape model that represents objects as point clouds and learns a stochastic denoising or diffusion process to transform random noise into realistic shapes. The model iteratively refines an initial noisy point set into a coherent point-cloud geometry through learned point displacement dynamics.",
+   "drifted": "Learning a generative diffusion model for point-cloud synthesis that transforms random point samples into structured 3D point clouds representing object geometry."
+  },
+  {
+   "target": "2306.17469",
+   "good": "We study speaker attribution in Japanese comics by identifying the character associated with each speech balloon using multimodal cues from text, layout, panel structure, and visual character information. This task requires resolving dialogue-to-speaker links in manga pages under ambiguous narration and stylistic variation.",
+   "drifted": "Develop a model for automatic speaker attribution in graphic narratives by associating each dialogue balloon with the most likely character based on panel-level visual cues, text position, and inter-panel context. Extend this to the related problem of resolving ambiguous dialogue-to-character links in multilingual comic layouts where speaker identity is not explicitly marked."
+  },
+  {
+   "target": "2512.24946",
+   "good": "We study restoration of degraded archival film with motion blur, scratches, and occlusions, with particular emphasis on preserving fine articulated structures during rapid human motion. The goal is temporally consistent video inpainting and enhancement that reconstructs missing regions without causing limb disappearance or other anatomically implausible artifacts.",
+   "drifted": "Develop methods for temporally consistent video inpainting of archival film restoration, with an emphasis on preserving fast-moving articulated objects and preventing limb disappearance or topology collapse under severe scratch and damage removal."
+  },
+  {
+   "target": "2506.24039",
+   "good": "We propose an interactive point-and-click annotation tool for microscopy images that enables scientists to delineate object boundaries without model training or dataset preparation. The method supports rapid, user-guided segmentation of structures directly in microscope imagery with minimal setup.",
+   "drifted": "A human-in-the-loop interactive segmentation framework for microscope imagery that enables rapid object delineation through sparse user clicks and polygonal guidance, without model retraining or dataset curation."
+  },
+  {
+   "target": "2106.16233",
+   "good": "We propose a chunk-wise autoregressive forecasting model for extremely long sensor time series that processes the stream incrementally rather than requiring the full sequence at once. The method enables scalable long-horizon prediction by modeling temporal dependencies across chunks while maintaining computational and memory efficiency.",
+   "drifted": "A model for predicting long sequences of multivariate time-series observations by processing fixed-length segments independently and then combining segment-level representations to estimate future values. The approach instead targets scalable forecasting over long temporal horizons with chunk-wise latent state propagation rather than direct sequence-to-sequence modeling."
+  },
+  {
+   "target": "2012.15667",
+   "good": "We study the minimum attainable memory traffic for the dominant computation kernels in image AI models and use these lower bounds to guide performance tuning and code generation. The goal is to optimize implementations by matching algorithmic structure to the memory hierarchy and reducing data movement overhead.",
+   "drifted": "Characterize the minimum achievable data movement for the dominant tensor operation in visual deep learning workloads, then use that lower bound as a target for automatically tuning kernel implementations and execution schedules."
+  },
+  {
+   "target": "2506.23996",
+   "good": "We derive closed-form expressions for the first and second derivatives of a divergence or dissimilarity measure between multivariate Gaussian distributions, with a focus on step-by-step analytic differentiation in arbitrary dimensions. The result provides the gradient and Hessian of a Gaussian-to-Gaussian discrepancy under general covariance structure.",
+   "drifted": "A step-by-step derivation of the gradient and Hessian of a divergence measure between multivariate Gaussian distributions, with an emphasis on how the discrepancy changes as the means and covariance matrices vary across dimensions."
+  },
+  {
+   "target": "1907.00262",
+   "good": "This work investigates whether inducing sparsity in a neural network alters the interpretability of its internal representations and units. Specifically, it asks whether pruning most connections makes hidden units more difficult to characterize mechanistically or conceptually.",
+   "drifted": "Does aggressive parameter sparsification in a neural network increase the difficulty of interpreting the representational roles of its internal units and activations?"
+  },
+  {
+   "target": "2506.18495",
+   "good": "A benchmark for automated neural architecture design targeting non-ideal analog in-memory computing hardware, with architectures evaluated for robustness to current-based noise and device variability in memory-based compute substrates.",
+   "drifted": "A benchmark for automated architecture search of neural network topologies that remain accurate and resource-efficient when deployed on unreliable analog accelerator hardware with stochastic device variability and current-based computation."
+  },
+  {
+   "target": "2206.15474",
+   "good": "This work investigates whether artificial intelligence systems can perform probabilistic forecasting of complex real-world events, such as elections and armed conflicts, at a level comparable to expert human forecasters. It examines the ability of AI models to generate calibrated predictions under uncertainty for high-stakes geopolitical outcomes.",
+   "drifted": "Can an AI model be trained to forecast major geopolitical events, such as policy shifts and interstate conflicts, with calibrated probabilities comparable to expert human analysts?"
+  },
+  {
+   "target": "2201.00057",
+   "good": "We study representation learning methods that produce features invariant to distribution shift, so models maintain predictive performance when test data differs from the training distribution. The goal is to learn robust, transferable representations that generalize under domain shift and out-of-distribution conditions.",
+   "drifted": "Learning representations that remain robust under distribution shift by adapting feature extraction to a related but distinct target domain with altered data statistics. The goal is to optimize invariance to covariate changes between source and deployment conditions rather than directly preserving performance on the original training distribution."
+  },
+  {
+   "target": "1907.00157",
+   "good": "We propose an automated fine-grained attribute recognition system for clothing images that predicts garment properties such as sleeve length and neckline style. The method aims to support scalable multi-label annotation of apparel photos with semantically meaningful fashion attributes.",
+   "drifted": "Automatically inferring fine-grained garment attributes from fashion images, such as material category, fit silhouette, and pattern type, for scalable apparel image annotation and retrieval."
+  },
+  {
+   "target": "2407.01639",
+   "good": "A formal verification toolkit for neural network models that provides mathematical guarantees of correct behavior over specified input domains. The system would verify safety and functional properties across entire input ranges, rather than on individual test cases.",
+   "drifted": "A verification framework for proving that a machine learning system satisfies formal correctness properties over a specified input domain, but applied to certifying robustness and safety guarantees for learned decision policies under distributional shift rather than exact behavioral correctness."
+  },
+  {
+   "target": "2208.13250",
+   "good": "Accelerating image recognition inference on reconfigurable hardware using a high-level programming model rather than low-level hardware description languages. The approach targets efficient deployment of vision models by enabling rapid compilation and execution on programmable chips.",
+   "drifted": "Developing a high-throughput, low-latency inference pipeline for image classification on a reconfigurable accelerator, using compiler-generated software kernels rather than hand-written hardware description code."
+  }
+ ]
+}
