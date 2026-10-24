@@ -16,7 +16,7 @@ The database holds 1,944 arXiv papers from hardware architecture (cs.AR), comput
 
 ## How to add items and how to search
 
-To add a paper, choose 2. Add a paper and paste its arXiv ID or URL, or press Enter to type in a title and abstract yourself; it becomes searchable right away. To search, choose 1. Check an idea, describe your idea in plain English, and optionally filter by category or earliest year (for example cs.AR 2022). The app then shows a novelty verdict, the 5 closest papers and a related-work summary, and lets you save the idea so later checks can remind you of it.
+To add a paper, choose 2. Add a paper and paste its arXiv ID or URL, or press Enter to type in a title and abstract yourself; it becomes searchable right away. To search, choose 1. Check an idea, describe your idea in plain English, and optionally filter by category or earliest year (for example cs.AR 2022). The app then shows a novelty verdict, the 5 closest papers and a related-work summary, and lets you save the idea so later checks can remind you of it. The result only shows up if an OpenAI key is set up.
 
 ## Two queries a keyword search would miss
 
@@ -26,7 +26,7 @@ Query B: "reprogrammable silicon that runs deep nets faster" returns Field-Progr
 
 ## How I used AI
 
-AI helped with idea generation and seeing what ideas would appeal greatly to my interests. Then it developed the technical implementation after I described the system design. 
+AI helped with idea generation and seeing what ideas would appeal greatly to my interests. Then it developed the technical implementation after I described the system design. I picked the project and my areas of interest and asked the eval questions. Claude Code brainstormed ideas, designed the code, and ran the tests and the evaluation. OpenAi gpt-5-5.4mini runs inside the app for the query rewrite and the related work summary. 
 
 ---
 
