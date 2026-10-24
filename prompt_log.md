@@ -76,6 +76,12 @@
 **Prompt 22**
 > [pasted the HW6 submission form] give me the answers for this
 
+**Prompt 23**
+> open the read me and tell me how to fix it
+
+**Prompt 24**
+> add the project to portfolio, remove wiki higher or lower. https://github.com/rkottomt/rkottomt.github.io
+
 ## Corrections made during development
 - Token-length check was wrong at first because the tokenizer had its own 128-token cutoff. In fact, 56% of abstracts exceed Chroma's 256-token limit.
 - Plain vector search rated knowledge distillation as "LOOKS OPEN". Fixed by also searching with an LLM rewrite of the idea in research terms.
