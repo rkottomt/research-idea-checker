@@ -8,26 +8,25 @@ CMU 15-114 HW6. Python CLI + ChromaDB. Prompt log: [`prompt_log.md`](prompt_log.
 
 ## What it does and why I chose it
 
-_TODO (Rohit): 1–2 sentences, in your own words._
+The user describes a research idea first and then the app finds all research papers that are similar to the idea and writes a short summary on how crowded the space is. 
 
 ## What's stored in the database
 
-_TODO (Rohit): in your own words. Cover where the data comes from, what one item is, whether/how it's broken up, roughly how many items, and the metadata on each. The facts are in [Data and metadata](#data-and-metadata) below._
+The database holds 1,944 arXiv papers from hardware architecture (cs.AR), computer vision (cs.CV) and machine learning (cs.LG), from 2019–2025, plus 200 extra papers that mention FPGAs. Each paper is one item, made of its title and abstract, and isn't split up because each abstract already covers one idea. Each one stores its title, authors, category, year, URL and source, and the same collection also holds the papers you add and the ideas you save while using the app.
 
 ## How to add items and how to search
 
-_TODO (Rohit): in your own words. Cover adding a paper by arXiv ID/URL or by typing it in, saving ideas, checking an idea, and the category/year filter._
+To add a paper, choose 2. Add a paper and paste its arXiv ID or URL, or press Enter to type in a title and abstract yourself; it becomes searchable right away. To search, choose 1. Check an idea, describe your idea in plain English, and optionally filter by category or earliest year (for example cs.AR 2022). The app then shows a novelty verdict, the 5 closest papers and a related-work summary, and lets you save the idea so later checks can remind you of it.
 
 ## Two queries a keyword search would miss
 
-_TODO (Rohit): in your own words. For each query: the query, the papers it retrieves, and one sentence on why keyword search would fail. Measured results are in [`test_queries.md`](test_queries.md):_
+Query A: "an AI that keeps adding to what it knows without wiping out earlier lessons" returns Self-Activating Neural Ensembles for Continual Reinforcement Learning (distance 0.399) and How Do Human Users Teach a Continual Learning Robot (0.427). Keyword search would miss both: neither shares a single content word with the query, because they say "continual learning" and "catastrophic forgetting" instead. Keyword search ranks them about 1,600th of 1,944.
 
-- _A: "an AI that keeps adding to what it knows without wiping out earlier lessons"_
-- _B: "reprogrammable silicon that runs deep nets faster"_
+Query B: "reprogrammable silicon that runs deep nets faster" returns Field-Programmable Gate Array Architecture for Deep Learning: Survey & Future Directions (0.347) first, and BARVINN, an FPGA accelerator, third (0.373). Keyword search would miss these too. The papers say "FPGA", "field-programmable" and "accelerator" instead of "reprogrammable silicon", so the survey shares only the generic word "deep" and ranks 501st, and BARVINN shares no words and ranks 753rd.
 
 ## How I used AI
 
-_TODO (Rohit): a short summary in your own words. The full record is in [`prompt_log.md`](prompt_log.md)._
+AI helped with idea generation and seeing what ideas would appeal greatly to my interests. Then it developed the technical implementation after I described the system design. 
 
 ---
 
