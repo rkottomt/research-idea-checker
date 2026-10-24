@@ -88,6 +88,9 @@
 **Prompt 26**
 > push the read me.
 
+**Prompt 27**
+> open the app
+
 ## Corrections made during development
 - Token-length check was wrong at first because the tokenizer had its own 128-token cutoff. In fact, 56% of abstracts exceed Chroma's 256-token limit.
 - Plain vector search rated knowledge distillation as "LOOKS OPEN". Fixed by also searching with an LLM rewrite of the idea in research terms.
